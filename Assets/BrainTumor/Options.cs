@@ -9,7 +9,9 @@ using System.Linq;
 
 public class Options : MonoBehaviour
 {
-    public void OnImportButtonClicked(string dir)
+    public string dataIndex;
+
+    private void Import(string dir)
     {
         if (Directory.Exists(dir))
         {
@@ -24,10 +26,23 @@ public class Options : MonoBehaviour
                 DICOMImporter importer = new DICOMImporter(fileCandidates, Path.GetFileName(dir));
                 VolumeDataset dataset = importer.Import();
                 if (dataset != null)
-                    VolumeObjectFactory.CreateObject(dataset);
+                {
+                    VolumeRenderedObject volumeObj = VolumeObjectFactory.CreateObject(dataset);
+                    volumeObj.transform.Rotate(new Vector3(180, 0, 0));
+                }
             }
             else
                 Debug.LogError("Could not find any DICOM files to import.");
         }
+    }
+
+    public void OnImportButtonClicked()
+    {
+        Import(dataIndex + "_flair");
+    }
+
+    public void OnSegmentationButtonClicked()
+    {
+        Import(dataIndex + "_seg");
     }
 }
