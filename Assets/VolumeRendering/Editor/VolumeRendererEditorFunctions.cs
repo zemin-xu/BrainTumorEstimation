@@ -10,7 +10,7 @@ namespace UnityVolumeRendering
     public class VolumeRendererEditorFunctions
     {
         [MenuItem("Volume Rendering/Load raw dataset")]
-        static void ShowDatasetImporter()
+        private static void ShowDatasetImporter()
         {
             string file = EditorUtility.OpenFilePanel("Select a dataset to load", "DataFiles", "");
             if (File.Exists(file))
@@ -24,9 +24,10 @@ namespace UnityVolumeRendering
         }
 
         [MenuItem("Volume Rendering/Load DICOM")]
-        static void ShowDICOMImporter()
+        public static void ShowDICOMImporter()
         {
             string dir = EditorUtility.OpenFolderPanel("Select a folder to load", "", "");
+            Debug.Log(dir);
             if (Directory.Exists(dir))
             {
                 bool recursive = true;
@@ -52,11 +53,9 @@ namespace UnityVolumeRendering
                     VolumeDataset dataset = importer.Import();
                     if (dataset != null)
                         VolumeObjectFactory.CreateObject(dataset);
-                }    
+                }
                 else
                     Debug.LogError("Could not find any DICOM files to import.");
-
-                
             }
             else
             {
@@ -65,7 +64,7 @@ namespace UnityVolumeRendering
         }
 
         [MenuItem("Volume Rendering/Load image sequence")]
-        static void ShowSequenceImporter()
+        private static void ShowSequenceImporter()
         {
             string dir = EditorUtility.OpenFolderPanel("Select a folder to load", "", "");
             if (Directory.Exists(dir))
