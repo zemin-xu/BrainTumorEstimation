@@ -17,7 +17,32 @@ public class Options : MonoBehaviour
 
     private GameObject boundingBox;
     private Renderer rend;
-    private Bounds bounds;
+
+    private void UpdateBrain(VolumeRenderedObject vro)
+    {
+        if (vro != null)
+        {
+            /* update renderer and bounds */
+            // volume data is stored in child gameobject
+            rend = vro.transform.GetChild(0).GetComponent<Renderer>();
+
+            Vector3 center = rend.bounds.center;
+            float radius = rend.bounds.extents.magnitude;
+
+            float x = rend.bounds.extents.x;
+            float y = rend.bounds.extents.y;
+            float z = rend.bounds.extents.z;
+            Debug.Log("for renderer: ");
+            Debug.Log("radius: " + radius);
+            Debug.Log("center: " + center);
+            Debug.Log("x: " + x);
+            Debug.Log("y: " + y);
+            Debug.Log("z: " + z);
+
+            // update position so that the world origin point is at the corner of brain
+            vro.transform.position = new Vector3(x, y, z);
+        }
+    }
 
     public void OnBoundingBoxButtonClicked()
     {
@@ -26,26 +51,6 @@ public class Options : MonoBehaviour
         BrainData loadedData = ReadData();
         boundingBox.transform.position = loadedData.boxCenter;
         boundingBox.transform.localScale = loadedData.boxDimension;
-
-        // output brain size
-        //rend = brain.transform.GetComponent<Renderer>();
-        //bounds = brain.transform.GetComponent<MeshFilter>().mesh.bounds;
-
-        //Vector3 center = rend.bounds.center;
-        //float radius = rend.bounds.extents.magnitude;
-
-        //float x = rend.bounds.extents.x;
-        //float y = rend.bounds.extents.y;
-        //float z = rend.bounds.extents.z;
-
-        //Debug.Log("radius: " + radius);
-        //Debug.Log("x: " + x);
-        //Debug.Log("y: " + y);
-        //Debug.Log("z: " + z);
-
-        //Vector3 c = bounds.center;
-        //float r = bounds.extents.magnitude;
-        //Debug.Log("r: " + r);
     }
 
     public BrainData ReadData()
@@ -85,10 +90,12 @@ public class Options : MonoBehaviour
     public void OnImportButtonClicked()
     {
         brain = Import(dataIndex + "_flair");
+        UpdateBrain(brain);
     }
 
     public void OnSegmentationButtonClicked()
     {
         brainSeg = Import(dataIndex + "_seg");
+        UpdateBrain(brainSeg);
     }
 }
