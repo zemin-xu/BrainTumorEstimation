@@ -49,8 +49,17 @@ public class Options : MonoBehaviour
         boundingBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
         BrainData loadedData = ReadData();
-        boundingBox.transform.position = loadedData.boxCenter;
-        boundingBox.transform.localScale = loadedData.boxDimension;
+        // scale of X and Z is 1.0, it contains 240 layers
+        float ratioX = 100.0f / 240.0f;
+        float ratioY = 100.0f / 155.0f;
+        float ratioZ = 100.0f / 240.0f;
+        boundingBox.transform.position = new Vector3(loadedData.boxCenter.x * 0.01f * ratioX,
+                                                    loadedData.boxCenter.y * 0.01f * ratioY,
+                                                    loadedData.boxCenter.z * 0.01f * ratioZ);
+
+        boundingBox.transform.localScale = new Vector3(loadedData.boxDimension.x * 0.01f * ratioX,
+                                                    loadedData.boxDimension.y * 0.01f * ratioY,
+                                                    loadedData.boxDimension.z * 0.01f * ratioZ);
     }
 
     public BrainData ReadData()
