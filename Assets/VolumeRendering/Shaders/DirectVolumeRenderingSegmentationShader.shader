@@ -158,7 +158,7 @@
 					// Create a small random offset in order to remove artifacts
 					rayStartPos = rayStartPos + (2.0f * rayDir / NUM_STEPS) * tex2D(_NoiseTex, float2(i.uv.x, i.uv.y)).r;
 
-					float4 col = float4(0.0f, 0.0f, 0.0f, 0.0f);
+					float4 col = float4(1.0f, 0.0f, 0.0f, 0.0f);
 					uint iDepth = 0;
 					for (uint iStep = 0; iStep < NUM_STEPS; iStep++)
 					{
@@ -196,16 +196,16 @@
 
 						if (density < _MinVal || density > _MaxVal)
 							src.a = 0.0f;
+						col.rgb = (1.0f - src.a) * col.rgb * 1.1;
+						//col.rgb = src.a * src.rgb + (1.0f - src.a) * col.rgb;
+							col.a = src.a + (1.0f - src.a) * col.a;
 
-						col.rgb = src.a * src.rgb + (1.0f - src.a) * col.rgb;
-						col.a = src.a + (1.0f - src.a) * col.a;
+							if (src.a > 0.15f)
+								iDepth = iStep;
 
-						if (src.a > 0.15f)
-							iDepth = iStep;
-
-						if (col.a > 1.0f)
-							break;
-					}
+							if (col.a > 1.0f)
+								break;
+						}
 
 					// Write fragment output
 					frag_out output;

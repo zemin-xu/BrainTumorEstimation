@@ -12,6 +12,7 @@ public class Options : MonoBehaviour
     public string dataIndex;
     public TextAsset jsonFile;
 
+    public Material matBrainSeg;
     private VolumeRenderedObject brain;
     private VolumeRenderedObject brainSeg;
 
@@ -32,12 +33,6 @@ public class Options : MonoBehaviour
             float x = rend.bounds.extents.x;
             float y = rend.bounds.extents.y;
             float z = rend.bounds.extents.z;
-            Debug.Log("for renderer: ");
-            Debug.Log("radius: " + radius);
-            Debug.Log("center: " + center);
-            Debug.Log("x: " + x);
-            Debug.Log("y: " + y);
-            Debug.Log("z: " + z);
 
             // update position so that the world origin point is at the corner of brain
             vro.transform.position = new Vector3(x, y, z);
@@ -62,7 +57,7 @@ public class Options : MonoBehaviour
                                                     loadedData.boxDimension.z * 0.01f * ratioZ);
     }
 
-    public BrainData ReadData()
+    private BrainData ReadData()
     {
         return JsonUtility.FromJson<BrainData>(jsonFile.text);
     }
@@ -105,6 +100,7 @@ public class Options : MonoBehaviour
     public void OnSegmentationButtonClicked()
     {
         brainSeg = Import(dataIndex + "_seg");
+        brainSeg.transform.GetChild(0).GetComponent<Renderer>().material = matBrainSeg;
         UpdateBrain(brainSeg);
     }
 }
