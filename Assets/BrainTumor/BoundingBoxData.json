@@ -1,13 +1,25 @@
 {
-    "dataName": "datanamess",
+    "dataIndex": "007",
+    "dataType": "val",
+    "tumorNum": 2,
     "boxCenter": {
-        "x": 71.0,
-        "y": 75.0,
-        "z": 134.0
+        "x": 70.5,
+        "y": 112,
+        "z": 148.5
     },
     "boxDimension": {
-        "x": 82.0,
-        "y": 48.0,
-        "z": 104.0
+        "x": 29.0,
+        "y": 34.0,
+        "z": 53.0
+    },
+    "boxCenter2": {
+        "x": 100.2,
+        "y": 100.2,
+        "z": 1.0
+    },
+    "boxDimension2": {
+        "x": 100.0,
+        "y": 100.0,
+        "z": 100.0
     }
 }

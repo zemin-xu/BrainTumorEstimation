@@ -45,16 +45,18 @@ public class Options : MonoBehaviour
 
         BrainData loadedData = ReadData();
         // scale of X and Z is 1.0, it contains 240 layers
-        float ratioX = 100.0f / 240.0f;
-        float ratioY = 100.0f / 155.0f;
-        float ratioZ = 100.0f / 240.0f;
-        boundingBox.transform.position = new Vector3(loadedData.boxCenter.x * 0.01f * ratioX,
-                                                    loadedData.boxCenter.y * 0.01f * ratioY,
-                                                    loadedData.boxCenter.z * 0.01f * ratioZ);
+        float ratio = 1.0f / 256.0f;
+        boundingBox.transform.position = new Vector3(loadedData.boxCenter.z * ratio,
+                                                    loadedData.boxCenter.y * ratio,
+                                                    loadedData.boxCenter.x * ratio);
 
-        boundingBox.transform.localScale = new Vector3(loadedData.boxDimension.x * 0.01f * ratioX,
-                                                    loadedData.boxDimension.y * 0.01f * ratioY,
-                                                    loadedData.boxDimension.z * 0.01f * ratioZ);
+        boundingBox.transform.localScale = new Vector3(loadedData.boxDimension.z * ratio,
+                                                    loadedData.boxDimension.y * ratio,
+                                                    loadedData.boxDimension.x * ratio);
+
+        Debug.Log(loadedData.boxCenter2.x); // output a vector3
+        Debug.Log(loadedData.dataIndex); // output a vector3
+        Debug.Log(loadedData.dataType); // output a vector3
     }
 
     private BrainData ReadData()
