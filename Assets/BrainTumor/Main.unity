@@ -384,8 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea193e22537a254983e706c55699619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataIndex: ./Assets/BrainTumor/Data/val_007
-  jsonFile: {fileID: 4900000, guid: 6bd1533d06f1dec44b9f6ffa50e99e1d, type: 3}
+  jsonFile: {fileID: 4900000, guid: 04d9b994e7e173f4a8b8aa0b96d31e4e, type: 3}
   matBrainSeg: {fileID: 2100000, guid: dcfc98c9148d7144a8678b031a2af421, type: 2}
 --- !u!1 &618894100
 GameObject:

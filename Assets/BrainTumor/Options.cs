@@ -9,7 +9,11 @@ using System.Linq;
 
 public class Options : MonoBehaviour
 {
-    public string dataIndex;
+    private string dataPrefix = "./Assets/BrainTumor/Data/";
+    private string completePath;
+
+    private BrainData brainData;
+
     public TextAsset jsonFile;
 
     public Material matBrainSeg;
@@ -17,7 +21,15 @@ public class Options : MonoBehaviour
     private VolumeRenderedObject brainSeg;
 
     private GameObject boundingBox;
+    private GameObject boundingBox2;
     private Renderer rend;
+
+    private void Start()
+    {
+        brainData = ReadData();
+        completePath = dataPrefix + brainData.dataType + "_" + brainData.dataIndex;
+        Debug.Log(completePath);
+    }
 
     private void UpdateBrain(VolumeRenderedObject vro)
     {
@@ -42,21 +54,25 @@ public class Options : MonoBehaviour
     public void OnBoundingBoxButtonClicked()
     {
         boundingBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        boundingBox2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-        BrainData loadedData = ReadData();
-        // scale of X and Z is 1.0, it contains 240 layers
         float ratio = 1.0f / 256.0f;
-        boundingBox.transform.position = new Vector3(loadedData.boxCenter.z * ratio,
-                                                    loadedData.boxCenter.y * ratio,
-                                                    loadedData.boxCenter.x * ratio);
 
-        boundingBox.transform.localScale = new Vector3(loadedData.boxDimension.z * ratio,
-                                                    loadedData.boxDimension.y * ratio,
-                                                    loadedData.boxDimension.x * ratio);
+        boundingBox.transform.position = new Vector3(brainData.boxCenter.z * ratio,
+                                                    brainData.boxCenter.y * ratio,
+                                                    brainData.boxCenter.x * ratio);
 
-        Debug.Log(loadedData.boxCenter2.x); // output a vector3
-        Debug.Log(loadedData.dataIndex); // output a vector3
-        Debug.Log(loadedData.dataType); // output a vector3
+        boundingBox.transform.localScale = new Vector3(brainData.boxDimension.z * ratio,
+                                                    brainData.boxDimension.y * ratio,
+                                                    brainData.boxDimension.x * ratio);
+
+        boundingBox2.transform.position = new Vector3(brainData.boxCenter2.z * ratio,
+                                                    brainData.boxCenter2.y * ratio,
+                                                    brainData.boxCenter2.x * ratio);
+
+        boundingBox2.transform.localScale = new Vector3(brainData.boxDimension2.z * ratio,
+                                                    brainData.boxDimension2.y * ratio,
+                                                    brainData.boxDimension2.x * ratio);
     }
 
     private BrainData ReadData()
@@ -95,13 +111,13 @@ public class Options : MonoBehaviour
 
     public void OnImportButtonClicked()
     {
-        brain = Import(dataIndex + "_flair");
+        brain = Import(completePath + "_flair");
         UpdateBrain(brain);
     }
 
     public void OnSegmentationButtonClicked()
     {
-        brainSeg = Import(dataIndex + "_seg");
+        brainSeg = Import(completePath + "_seg");
         brainSeg.transform.GetChild(0).GetComponent<Renderer>().material = matBrainSeg;
         UpdateBrain(brainSeg);
     }

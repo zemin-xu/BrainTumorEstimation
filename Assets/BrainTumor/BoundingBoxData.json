@@ -1,6 +1,6 @@
 {
-    "dataIndex": "007",
-    "dataType": "val",
+    "dataIndex": "001",
+    "dataType": "train",
     "tumorNum": 2,
     "boxCenter": {
         "x": 70.5,
