@@ -17,6 +17,7 @@ public class Options : MonoBehaviour
     public TextAsset jsonFile;
 
     public Material matBrainSeg;
+    public Material matBoundingBox;
     private VolumeRenderedObject brain;
     private VolumeRenderedObject brainSeg;
 
@@ -56,22 +57,26 @@ public class Options : MonoBehaviour
         boundingBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
         boundingBox2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-        float ratio = 1.0f / 256.0f;
+        boundingBox.GetComponent<Renderer>().material = matBoundingBox;
+        boundingBox2.GetComponent<Renderer>().material = matBoundingBox;
 
-        boundingBox.transform.position = new Vector3(brainData.boxCenter.z * ratio,
-                                                    brainData.boxCenter.y * ratio,
+        float ratio = 1.0f / 256.0f;
+        float ratioZ = 1.0f / 240.0f;
+
+        boundingBox.transform.position = new Vector3(brainData.boxCenter.y * ratio,
+                                                    brainData.boxCenter.z * ratioZ,
                                                     brainData.boxCenter.x * ratio);
 
-        boundingBox.transform.localScale = new Vector3(brainData.boxDimension.z * ratio,
-                                                    brainData.boxDimension.y * ratio,
+        boundingBox.transform.localScale = new Vector3(brainData.boxDimension.y * ratio,
+                                                    brainData.boxDimension.z * ratioZ,
                                                     brainData.boxDimension.x * ratio);
 
-        boundingBox2.transform.position = new Vector3(brainData.boxCenter2.z * ratio,
-                                                    brainData.boxCenter2.y * ratio,
+        boundingBox2.transform.position = new Vector3(brainData.boxCenter2.y * ratio,
+                                                    brainData.boxCenter2.z * ratioZ,
                                                     brainData.boxCenter2.x * ratio);
 
-        boundingBox2.transform.localScale = new Vector3(brainData.boxDimension2.z * ratio,
-                                                    brainData.boxDimension2.y * ratio,
+        boundingBox2.transform.localScale = new Vector3(brainData.boxDimension2.y * ratio,
+                                                    brainData.boxDimension2.z * ratioZ,
                                                     brainData.boxDimension2.x * ratio);
     }
 

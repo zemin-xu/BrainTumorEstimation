@@ -386,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jsonFile: {fileID: 4900000, guid: 04d9b994e7e173f4a8b8aa0b96d31e4e, type: 3}
   matBrainSeg: {fileID: 2100000, guid: dcfc98c9148d7144a8678b031a2af421, type: 2}
+  matBoundingBox: {fileID: 2100000, guid: 8e79e3a4fe23fa746ab1262e499918f9, type: 2}
 --- !u!1 &618894100
 GameObject:
   m_ObjectHideFlags: 0
