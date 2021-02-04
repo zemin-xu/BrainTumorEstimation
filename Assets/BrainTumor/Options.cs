@@ -29,6 +29,8 @@ public class Options : MonoBehaviour
     private GameObject boundingBox2;
     private Renderer rend;
 
+    private bool hasBoundingBox = false;
+
     private void Start()
     {
         brainData = ReadData();
@@ -58,30 +60,48 @@ public class Options : MonoBehaviour
 
     public void OnBoundingBoxButtonClicked()
     {
-        boundingBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        boundingBox2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        if (hasBoundingBox)
+        {
+            boundingBox.SetActive(false);
+            boundingBox2.SetActive(false);
+            hasBoundingBox = false;
+        }
+        else
+        {
+            if (boundingBox == null || boundingBox2 == null)
+            {
+                boundingBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                boundingBox2 = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-        boundingBox.GetComponent<Renderer>().material = matBoundingBox;
-        boundingBox2.GetComponent<Renderer>().material = matBoundingBox;
+                boundingBox.GetComponent<Renderer>().material = matBoundingBox;
+                boundingBox2.GetComponent<Renderer>().material = matBoundingBox;
 
-        float ratio = 1.0f / 256.0f;
-        float ratioZ = 1.0f / 240.0f;
+                float ratio = 1.0f / 256.0f;
+                float ratioZ = 1.0f / 240.0f;
 
-        boundingBox.transform.position = new Vector3(brainData.boxCenter.y * ratio,
-                                                    brainData.boxCenter.z * ratioZ,
-                                                    brainData.boxCenter.x * ratio);
+                boundingBox.transform.position = new Vector3(brainData.boxCenter.y * ratio,
+                                                            brainData.boxCenter.z * ratioZ,
+                                                            brainData.boxCenter.x * ratio);
 
-        boundingBox.transform.localScale = new Vector3(brainData.boxDimension.y * ratio,
-                                                    brainData.boxDimension.z * ratioZ,
-                                                    brainData.boxDimension.x * ratio);
+                boundingBox.transform.localScale = new Vector3(brainData.boxDimension.y * ratio,
+                                                            brainData.boxDimension.z * ratioZ,
+                                                            brainData.boxDimension.x * ratio);
 
-        boundingBox2.transform.position = new Vector3(brainData.boxCenter2.y * ratio,
-                                                    brainData.boxCenter2.z * ratioZ,
-                                                    brainData.boxCenter2.x * ratio);
+                boundingBox2.transform.position = new Vector3(brainData.boxCenter2.y * ratio,
+                                                            brainData.boxCenter2.z * ratioZ,
+                                                            brainData.boxCenter2.x * ratio);
 
-        boundingBox2.transform.localScale = new Vector3(brainData.boxDimension2.y * ratio,
-                                                    brainData.boxDimension2.z * ratioZ,
-                                                    brainData.boxDimension2.x * ratio);
+                boundingBox2.transform.localScale = new Vector3(brainData.boxDimension2.y * ratio,
+                                                            brainData.boxDimension2.z * ratioZ,
+                                                            brainData.boxDimension2.x * ratio);
+            }
+            else
+            {
+                boundingBox.SetActive(true);
+                boundingBox2.SetActive(true);
+            }
+            hasBoundingBox = true;
+        }
     }
 
     private BrainData ReadData()

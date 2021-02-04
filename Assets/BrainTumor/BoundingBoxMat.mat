@@ -113,7 +113,7 @@ Material:
     - _EnvironmentColoring: 0
     - _FadeBeginDistance: 0.85
     - _FadeCompleteDistance: 0.5
-    - _FadeMinValue: 0
+    - _FadeMinValue: 0.5
     - _FluentLightIntensity: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
