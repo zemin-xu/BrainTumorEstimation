@@ -6,6 +6,7 @@ using System;
 
 using System.IO;
 using System.Linq;
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class Options : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Options : MonoBehaviour
 
     public Material matBrainSeg;
     public Material matBoundingBox;
+
+    public PinchSlider pinchSlider;
+
     private VolumeRenderedObject brain;
     private VolumeRenderedObject brainSeg;
 
@@ -125,5 +129,13 @@ public class Options : MonoBehaviour
         brainSeg = Import(completePath + "_seg");
         brainSeg.transform.GetChild(0).GetComponent<Renderer>().material = matBrainSeg;
         UpdateBrain(brainSeg);
+    }
+
+    public void OnSliderValueChanged()
+    {
+        if (brain != null)
+        {
+            brain.SetVisibilityWindow(new Vector2(brain.visibilityWindow.x, pinchSlider.SliderValue));
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace UnityVolumeRendering
         private TFRenderMode tfRenderMode = TFRenderMode.TF2D;
         private bool lightingEnabled;
 
-        private Vector2 visibilityWindow = new Vector2(0.0f, 1.0f);
+        public Vector2 visibilityWindow = new Vector2(0.0f, 1.0f);
 
         public SlicingPlane CreateSlicingPlane()
         {
