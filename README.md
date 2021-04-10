@@ -1,18 +1,10 @@
----
-layout: default 
-parent: Extended Reality
-title: Brain Tumor Estimation -- Mixed Reality
-date: 2021-02-04
----
-
-# {{ page.title }}
+Please go to the following link to get latest presentation: https://zemin-xu.me/docs/extended-reality/brain-tumor-estimation.html 
 
 Collaborator: [M. ABDUL GAFOOR](https://mohamedabdulgafoor.wixsite.com/website/blog)
 
 Supervisor: [M. PREDA](https://scholar.google.com/citations?user=Dx9C-0sAAAAJ)
 
 A pipeline composed of tumor detection in human brain using deep learning and visualization using Mixed Reality(MR) technology.
-{: .fs-6 .fw-300 }
 
 ---
 
