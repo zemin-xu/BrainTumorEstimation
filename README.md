@@ -1,4 +1,4 @@
-Please go to the following link to get latest presentation: https://zemin-xu.me/docs/extended-reality/brain-tumor-estimation.html 
+# Please go to the following link to get latest presentation: https://zemin-xu.me/docs/extended-reality/brain-tumor-estimation.html 
 
 Collaborator: [M. ABDUL GAFOOR](https://mohamedabdulgafoor.wixsite.com/website/blog)
 
@@ -7,15 +7,6 @@ Supervisor: [M. PREDA](https://scholar.google.com/citations?user=Dx9C-0sAAAAJ)
 A pipeline composed of tumor detection in human brain using deep learning and visualization using Mixed Reality(MR) technology.
 
 ---
-
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
 
 ## Problematic
 
